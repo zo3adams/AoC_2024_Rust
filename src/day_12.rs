@@ -238,14 +238,14 @@ fn part_two(map: Vec<Vec<char>>) -> u32 {
 
 
 fn main() {
-    let input = "./src/input.txt";     
+    let input = "./src/sample_input.txt";     
 
     match read_lines(input) {
         Ok(value) => {     
             let mut map: Vec<Vec<char>> = value.iter().map(|s| s.chars().collect()).collect();   
             println!("{:?}", map);
-            //println!("Answer to part one:  {}", part_one(map));
-            println!("Answer to part two:  {}", part_two(map));
+            println!("Answer to part one:  {}", part_one(map, moves));
+            //println!("Answer to part two:  {}", part_two(map));
         },
         Err(e) => println!("Error: {}", e),
     }
