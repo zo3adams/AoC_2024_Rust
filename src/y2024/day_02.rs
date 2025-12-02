@@ -53,7 +53,7 @@ fn is_safe(row:&Vec<i32>) -> bool {
 }
 
 
-fn part_one(data: Vec<Vec<i32>>) -> i32 {
+fn _part_one(data: Vec<Vec<i32>>) -> i32 {
     let mut safe_count = 0;
     for row in data {    
         if is_safe(&row) {
@@ -108,7 +108,7 @@ fn part_two(data: Vec<Vec<i32>>) -> i32 {
     safe_count
 }
 
-fn main() {
+pub fn run()-> io::Result<()> {
 
     let input = "./src/input.txt";
 
@@ -130,4 +130,7 @@ fn main() {
     //part_one(data);
     part_two(data);
 
+    Ok(())
+
 }
+

@@ -105,7 +105,7 @@ fn part_two(map: &mut Vec<Vec<char>>) -> u32 {
 }
 
 
-fn main() {
+pub fn run()-> io::Result<()> {
     let input = "./src/input.txt";     
     let mut map:Vec<Vec<char>>;
     match read_lines(input) {
@@ -117,6 +117,6 @@ fn main() {
         },
         Err(e) => println!("Error: {}", e),
     }
-
+    Ok(())
     
 }

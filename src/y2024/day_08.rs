@@ -40,7 +40,7 @@ fn get_unique_chars(map: &mut Vec<Vec<char>>) -> HashMap<char, Vec<(usize,usize)
     char_positions
 }
 
-fn part_one(map: &mut Vec<Vec<char>>) -> u32 {
+fn _part_one(map: &mut Vec<Vec<char>>) -> u32 {
     
     let height = map.len();
     let width = map[0].len();
@@ -156,7 +156,7 @@ fn part_two(map: &mut Vec<Vec<char>>) -> u32 {
 }
 
 
-fn main() {
+pub fn run()-> io::Result<()> {
     let input = "./src/input.txt";     
     let mut map:Vec<Vec<char>> = Vec::new();
     match read_lines(input) {
@@ -172,5 +172,5 @@ fn main() {
         Err(e) => println!("Error: {}", e),
     }
 
-    
+     Ok(())   
 }

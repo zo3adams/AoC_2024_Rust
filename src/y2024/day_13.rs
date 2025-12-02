@@ -19,7 +19,7 @@ where
 
 
 // a*x_a + b*x_b = prize+x,    a*y_a + b * b_y = prize_y,  derivative  3a + 1b = 0 to find min
-fn part_one(a_positions: Vec<(i32,i32)>, b_positions: Vec<(i32,i32)>, prize_locations: Vec<(i32,i32)>) -> i32 {
+fn _part_one(a_positions: Vec<(i32,i32)>, b_positions: Vec<(i32,i32)>, prize_locations: Vec<(i32,i32)>) -> i32 {
 let mut min_tokens_sum = 0;
 
 for i in 0..a_positions.len()  {
@@ -74,13 +74,13 @@ fn part_two(a_positions: Vec<(i32,i32)>, b_positions: Vec<(i32,i32)>, prize_loca
         let b_y = b_positions[i].1 as i64;
     
         println!("searching for A:{},{}   B:{},{},  Prize:{},{}", a_positions[i].0, a_positions[i].1,b_positions[i].0, b_positions[i].1, target_x, target_y );
-        let CRAMERS_A = (target_x * b_y - target_y*b_x) / (a_x*b_y - a_y*b_x);
-        let CRAMERS_B = (a_x*target_y - a_y*target_x) / (a_x*b_y - a_y*b_x);
+        let cramers_a = (target_x * b_y - target_y*b_x) / (a_x*b_y - a_y*b_x);
+        let cramers_b = (a_x*target_y - a_y*target_x) / (a_x*b_y - a_y*b_x);
         //check if it's valid
-        if (CRAMERS_A * a_x + CRAMERS_B * b_x) == target_x && (CRAMERS_A * a_y + CRAMERS_B * b_y) == target_y {
-            let cost = 3*CRAMERS_A + 1 * CRAMERS_B;
-            println!("{} {}  and {} will hit target and {}", "Found!".green(), format!("{} presses of A",CRAMERS_A).red(), format!("{} presses of B", 
-            CRAMERS_B).blue(), 
+        if (cramers_a * a_x + cramers_b * b_x) == target_x && (cramers_a * a_y + cramers_b * b_y) == target_y {
+            let cost = 3*cramers_a + 1 * cramers_b;
+            println!("{} {}  and {} will hit target and {}", "Found!".green(), format!("{} presses of A",cramers_a).red(), format!("{} presses of B", 
+            cramers_b).blue(), 
             format!(" cost will be {}", cost).bold().yellow());
             min_tokens_sum += cost;
         }
@@ -91,7 +91,7 @@ fn part_two(a_positions: Vec<(i32,i32)>, b_positions: Vec<(i32,i32)>, prize_loca
 }
 
 
-fn main() {
+pub fn run()-> io::Result<()> {
     let input = "./src/input.txt";     
     let re = Regex::new(r"X[+=](\d+), Y[+=](\d+)").unwrap();
 
@@ -133,4 +133,5 @@ fn main() {
         },
         Err(e) => println!("Error: {}", e),
     }
+    Ok(())
 }

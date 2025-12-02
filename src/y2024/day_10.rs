@@ -67,7 +67,7 @@ fn find_paths(data: &Vec<Vec<u32>>, starting_h:usize, starting_w:usize) -> Vec<V
 }
 
 
-fn part_one(data: Vec<Vec<u32>>) -> u64 {
+fn _part_one(data: Vec<Vec<u32>>) -> u64 {
     let max_height:usize = data.len();
     let max_width:usize = data[0].len();
 
@@ -123,7 +123,7 @@ fn part_two(data: Vec<Vec<u32>>) -> u64 {
 }
 
 
-fn main() {
+pub fn run()-> io::Result<()> {
     let input = "./src/input.txt";     
 
     match read_lines(input) {
@@ -141,5 +141,5 @@ fn main() {
         Err(e) => println!("Error: {}", e),
     }
 
-    
+     Ok(())   
 }

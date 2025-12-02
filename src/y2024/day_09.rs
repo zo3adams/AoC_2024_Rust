@@ -40,7 +40,7 @@ fn get_expanded_view(data: Vec<u32>) -> Vec<i32>{
    expanded_view
 }
 
-fn part_one(data: Vec<u32>) -> u64 {
+fn _part_one(data: Vec<u32>) -> u64 {
 
     println!("input data has length {} implying {} unique files", data.len(), (data.len()+1)/2);
    //create initial expanded view
@@ -181,7 +181,7 @@ fn part_two(data: Vec<u32>) -> u64 {
 }
 
 
-fn main() {
+pub fn run()-> io::Result<()> {
     let input = "./src/input.txt";     
 
     match read_lines(input) {
@@ -199,5 +199,5 @@ fn main() {
         Err(e) => println!("Error: {}", e),
     }
 
-    
+    Ok(())  
 }

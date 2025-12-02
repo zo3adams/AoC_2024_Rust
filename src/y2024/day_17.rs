@@ -1,7 +1,6 @@
 use std::fs::File;
-use std::io::{self, BufRead, Write};
+use std::io::{self, BufRead};
 use std::path::Path;
-use colored::Colorize;
 
 
 
@@ -115,14 +114,14 @@ fn part_two(reg_b: i64, reg_c: i64, instructions: Vec<u8>) -> i64 {
 }
 
 
-fn main() {
+pub fn run()-> io::Result<()> {
     let input = "./src/input.txt";  
 
 
     match read_lines(input) {
         Ok(value) => {    
 
-            let mut reg_a: i64 = 0;
+            let mut _reg_a: i64 = 0;
             let mut reg_b: i64 = 0;
             let mut reg_c: i64 = 0;
 
@@ -130,7 +129,7 @@ fn main() {
 
             for line in value {
                 if line.contains("Register A") {
-                    reg_a = line.split(": ")
+                    _reg_a = line.split(": ")
                     .nth(1)
                     .unwrap()
                     .parse::<i64>()
@@ -170,5 +169,5 @@ fn main() {
          Err(e) => println!("Error: {}", e),
           
         }
-        
+        Ok(())   
     }

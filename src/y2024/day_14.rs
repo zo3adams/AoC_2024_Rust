@@ -1,11 +1,10 @@
 use std::fs::File;
-use std::cmp::min;
 use std::i32;
 use std::collections::HashMap;
 use std::io::{self, BufRead};
 use std::path::Path;
 use regex::Regex;
-use colored::Colorize;
+
 
 
 fn read_lines<P>(filename: P) -> Result<Vec<String>,std::io::Error>
@@ -57,7 +56,7 @@ fn print_robot_positions(robot_positions: Vec< (i32,i32,i32,i32)>, space_width: 
 
 
 // p=2,4 v=2,-3    4,1    6,5    8,2,    10,6     1,3  
-fn part_one(robot_positions: &mut Vec< (i32,i32,i32,i32)>, space_width: usize, space_height: usize) -> u32 {
+fn _part_one(robot_positions: &mut Vec< (i32,i32,i32,i32)>, space_width: usize, space_height: usize) -> u32 {
     let iterations = 100;
 
     let mut calc_final_positions: Vec<(i32, i32)> = Vec::new();
@@ -68,7 +67,7 @@ fn part_one(robot_positions: &mut Vec< (i32,i32,i32,i32)>, space_width: usize, s
         calc_final_positions.push((final_pos_x, final_pos_y));
     }
 
-    for i in 0..iterations {
+    for _i in 0..iterations {
         for robot in &mut * robot_positions {
             robot.0 = (((robot.0 + robot.2) % space_width as i32) + space_width as i32 ) % space_width as i32;
             robot.1 = (((robot.1 + robot.3) % space_height as i32) + space_height as i32) % space_height as i32;
@@ -115,7 +114,7 @@ fn part_two(robot_positions: &mut Vec< (i32,i32,i32,i32)>, space_width: usize, s
             bots_per_row.entry(robot.1).and_modify(|val| val.push(robot.0)).or_insert(vec![robot.0]);                
         }
         
-        for (k,v) in bots_per_row.iter() {
+        for (_k,v) in bots_per_row.iter() {
 
             let mut sorted_version = v.clone();
             sorted_version.sort();
@@ -144,7 +143,7 @@ fn part_two(robot_positions: &mut Vec< (i32,i32,i32,i32)>, space_width: usize, s
 }
 
 
-fn main() {
+pub fn run()-> io::Result<()> {
     let input = "./src/input.txt";  
     let space_width: usize = 101;
     let space_height: usize =  103;
@@ -175,5 +174,5 @@ fn main() {
          Err(e) => println!("Error: {}", e),
           
         }
-        
+        Ok(())    
     }

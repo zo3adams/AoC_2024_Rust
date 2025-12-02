@@ -1,5 +1,4 @@
 
-use std::cmp::max;
 use std::fs::File;
 use std::i64;
 use std::io::{self, BufRead};
@@ -18,7 +17,7 @@ where
 
 
 
-fn part_one(connections:  HashMap<String, Vec<String>>) -> i64 {
+fn _part_one(connections:  HashMap<String, Vec<String>>) -> i64 {
 
     let mut all_triplets: HashSet<Vec<String>> = HashSet::new();
     let mut just_t_triplets: HashSet<Vec<String>> = HashSet::new();
@@ -50,9 +49,9 @@ fn part_one(connections:  HashMap<String, Vec<String>>) -> i64 {
 fn part_two(connections: HashMap<String, Vec<String>>) -> i64 {
    let mut cliques: Vec<HashSet<String>> = Vec::new();
    let all_nodes_list = connections.keys().clone();
-   for i in 0..3 {
+   for _i in 0..3 {
     for node in all_nodes_list.clone() {
-        let mut has_found_clique = false;
+        let has_found_clique = false;
 
         for clique in &mut cliques {
             let mut was_fully_connected = true;
@@ -90,13 +89,13 @@ fn part_two(connections: HashMap<String, Vec<String>>) -> i64 {
     println!("Max clique size seen is: {} -- {:?}", max_clique.len(), max_clique);
     let mut max_as_list: Vec<String> = max_clique.into_iter().collect();
     max_as_list.sort();
-   let mut password: String = max_as_list.join(",");
+   let password: String = max_as_list.join(",");
    println!("password {}", password);
    0
 }
 
 
-fn main() {
+pub fn run()-> io::Result<()> {
     let input = "./src/input.txt";  
 
 
@@ -115,6 +114,7 @@ fn main() {
          },
          Err(e) => println!("Error: {}", e),
           
-        }
-        
+        }   
+       Ok(())
     }
+

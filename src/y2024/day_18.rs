@@ -163,7 +163,7 @@ fn get_path(start_node: String, end_node: String, distances: & HashMap<String, (
 }
 
 //Djikstra's algorithm with a novel cost function that counts turns, so nodes are position + direction.
-fn part_one(bit_positions:  &mut  Vec<(usize,usize)>, grid_size: usize, bits_to_wait_on: usize) -> i32 {
+fn _part_one(bit_positions:  &mut  Vec<(usize,usize)>, grid_size: usize, bits_to_wait_on: usize) -> i32 {
     let mut map: Vec<Vec<char>> = vec![vec!['.'; grid_size]; grid_size];
     let start_node:String = String::from("0_0");
 
@@ -224,7 +224,7 @@ fn part_two(bit_positions:  &mut  Vec<(usize,usize)>, grid_size: usize) -> i32 {
 
 
 
-fn main() {
+pub fn run()-> io::Result<()> {
     let input = "./src/input.txt";  
 
     match read_lines(input) {
@@ -252,5 +252,5 @@ fn main() {
          Err(e) => println!("Error: {}", e),
           
         }
-        
+    Ok(())    
     }

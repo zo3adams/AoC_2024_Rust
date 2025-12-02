@@ -3,8 +3,6 @@ use std::fs::File;
 use std::io::{self, BufRead};
 use std::path::Path;
 use std::clone::Clone;
-use std::collections::HashSet;
-
 
 fn read_lines<P>(filename: P) -> Result<Vec<String>,std::io::Error>
 where
@@ -16,7 +14,7 @@ where
     Ok(lines)
 }
 
-
+#[allow(dead_code)]
 #[derive(Debug, PartialEq, Eq, Hash, Clone, Copy)]
 enum Direction {
     Horizontal,
@@ -29,6 +27,7 @@ enum Direction {
     DiagonalUpLeft,
 }
 
+#[allow(dead_code)]
 #[derive(Debug, Clone)]
 struct PatternMatch {
     row: usize,
@@ -36,7 +35,7 @@ struct PatternMatch {
     direction: Direction,
 }
 
-fn find_pattern(grid: &Vec<Vec<char>>, pattern: &str) -> Vec<PatternMatch> {
+fn _find_pattern(grid: &Vec<Vec<char>>, pattern: &str) -> Vec<PatternMatch> {
     let pattern_chars: Vec<char> = pattern.chars().collect();
     let mut matches = Vec::new();
 
@@ -63,7 +62,7 @@ fn find_pattern(grid: &Vec<Vec<char>>, pattern: &str) -> Vec<PatternMatch> {
             // Check each direction
             for &(dr, dc, direction) in &directions {
                 // Forward search
-                if let Some(match_result) = check_pattern_forward(
+                if let Some(_match_result) = _check_pattern_forward(
                     grid, 
                     &pattern_chars, 
                     start_row, 
@@ -84,7 +83,7 @@ fn find_pattern(grid: &Vec<Vec<char>>, pattern: &str) -> Vec<PatternMatch> {
     matches
 }
 
-fn check_pattern_forward(
+fn _check_pattern_forward(
     grid: &Vec<Vec<char>>, 
     pattern: &Vec<char>, 
     start_row: usize, 
@@ -117,8 +116,8 @@ fn check_pattern_forward(
     Some(true)
 }
 
-fn part_one(data: &Vec<Vec<char>>) -> u32 {
-    let pattern_matches = find_pattern(&data, "XMAS");
+fn _part_one(data: &Vec<Vec<char>>) -> u32 {
+    let pattern_matches = _find_pattern(&data, "XMAS");
    // println!(" pattern matches {:?}", pattern_matches);
     //println!("Found {} matches", pattern_matches.len());
     pattern_matches.len() as u32
@@ -146,7 +145,7 @@ fn part_two(data: &Vec<Vec<char>>) -> u32 {
 
 }
 
-fn main() {
+pub fn run()-> io::Result<()> {
     let input = "./src/input.txt";     
  
     match read_lines(input) {
@@ -161,5 +160,5 @@ fn main() {
         Err(e) => println!("Error: {}", e),
     }
   
-
+    Ok(())
 }

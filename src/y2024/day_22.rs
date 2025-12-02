@@ -3,7 +3,7 @@ use std::fs::File;
 use std::i64;
 use std::io::{self, BufRead};
 use std::path::Path;
-use std::collections::{HashSet, HashMap};
+use std::collections::{HashMap};
 
 fn read_lines<P>(filename: P) -> Result<Vec<String>,std::io::Error>
 where
@@ -22,7 +22,7 @@ fn get_generated_secrets(start_secrets: Vec<i64>, iterations: usize) -> Vec<Vec<
     for mut secret in start_secrets {
         let mut in_prog_secrets:Vec<i64> = Vec::new();
         in_prog_secrets.push(secret);
-        for i in 0..iterations {
+        for _i in 0..iterations {
             //println!("on turn {} secret is {}", i, secret);
             let step_one = ((secret * 64) ^ secret) % 16777216;
             let step_two = ((step_one / 32) ^ step_one) % 16777216;
@@ -37,11 +37,11 @@ fn get_generated_secrets(start_secrets: Vec<i64>, iterations: usize) -> Vec<Vec<
     all_secrets
 }
 
-fn part_one(start_secrets:  Vec<i64>) -> i64 {
+fn _part_one(start_secrets:  Vec<i64>) -> i64 {
     get_generated_secrets(start_secrets, 2000).iter().map(|v| v.last().unwrap_or(&0)).sum()
 }
 
-fn get_sequence_return(sequence: (i64,i64,i64,i64), all_deltas: & Vec<Vec<i64>>, generated_secrets: & Vec<Vec<i64>>) -> (i64, Vec<i64>) {
+fn _get_sequence_return(sequence: (i64,i64,i64,i64), all_deltas: & Vec<Vec<i64>>, generated_secrets: & Vec<Vec<i64>>) -> (i64, Vec<i64>) {
     //for each delta, scan through to find sequence, then pull value from that index in generated_secrets
     let mut val_sum: i64 = 0;
     let mut individual_values: Vec<i64> = Vec::new();
@@ -108,7 +108,7 @@ fn part_two(start_secrets:  Vec<i64>) -> i64 {
 }
 
 
-fn main() {
+pub fn run()-> io::Result<()> {
     let input = "./src/input.txt";  
 
 
@@ -125,5 +125,7 @@ fn main() {
          Err(e) => println!("Error: {}", e),
           
         }
+
+    Ok(())
         
     }

@@ -17,7 +17,7 @@ where
 
 
 
-fn part_one(map: Vec<Vec<char>>) -> u32 {
+fn _part_one(map: Vec<Vec<char>>) -> u32 {
     let mut total_fence_cost: u32 = 0;
 
     let max_h = map.len();
@@ -188,10 +188,10 @@ fn part_two(map: Vec<Vec<char>>) -> u32 {
                 if is_a_perim {
                     println!("we see a perimeter at {},{}  facing {},{}  -- adding to our collection", i,j, direction.0, direction.1);
                     if direction.0 == 0 {      
-                        sides_by_direction.entry((direction.0, direction.1, *j)).and_modify(|v| v.push((*i))).or_insert(vec![(*i)]); 
+                        sides_by_direction.entry((direction.0, direction.1, *j)).and_modify(|v| v.push(*i)).or_insert(vec![(*i)]); 
                         println!("  collection at ({},{},{}) grew to {:?}",direction.0, direction.1, *j, sides_by_direction[&(direction.0, direction.1, *j)]);
                     } else if direction.1 == 0 {
-                        sides_by_direction.entry((direction.0, direction.1, *i)).and_modify(|v| v.push((*j))).or_insert(vec![(*j)]); 
+                        sides_by_direction.entry((direction.0, direction.1, *i)).and_modify(|v| v.push(*j)).or_insert(vec![(*j)]); 
                         println!("  collection at {},{},{}  grew to {:?}", direction.0, direction.1, *i, sides_by_direction[&(direction.0, direction.1, *i)]);
                     }
                 }
@@ -237,16 +237,19 @@ fn part_two(map: Vec<Vec<char>>) -> u32 {
 }
 
 
-fn main() {
+pub fn run()-> io::Result<()> {
     let input = "./src/sample_input.txt";     
 
     match read_lines(input) {
         Ok(value) => {     
-            let mut map: Vec<Vec<char>> = value.iter().map(|s| s.chars().collect()).collect();   
+            let map: Vec<Vec<char>> = value.iter().map(|s| s.chars().collect()).collect();   
             println!("{:?}", map);
-            println!("Answer to part one:  {}", part_one(map, moves));
-            //println!("Answer to part two:  {}", part_two(map));
+            //println!("Answer to part one:  {}", part_one(map, moves));
+            println!("Answer to part two:  {}", part_two(map));
         },
         Err(e) => println!("Error: {}", e),
     }
+    Ok(())
+
 }
+

@@ -1,13 +1,10 @@
 
-use std::fs::{File, OpenOptions, remove_file};
-use std::io::{self, Write};
-use std::ptr::addr_eq;
-use std::{any, i64};
+use std::fs::{File};
+use std::io::{self};
 use std::io::{BufRead};
 use std::path::Path;
-use std::collections::{HashMap, HashSet, VecDeque};
-use indexmap::IndexMap;
 
+#[allow(dead_code)]
 #[derive(Debug, Clone)]
 struct Operation {
     input1: String,
@@ -56,7 +53,7 @@ fn part_one(locks: Vec<Vec<u32>>, keys: Vec<Vec<u32>>) -> u32 {
     fit_count
  }        
 
-fn main() {
+pub fn run()-> io::Result<()> {
     let input = "./src/input.txt";  
 
 
@@ -101,10 +98,10 @@ fn main() {
                     keys.push(new_key);
                 }
             }
-            println!("Answer to part two:  {}", part_one( locks, keys));
+            println!("Answer to part one:  {}", part_one( locks, keys));
          },
          Err(e) => println!("Error: {}", e),
           
         }
-        
-    }
+        Ok(())
+}

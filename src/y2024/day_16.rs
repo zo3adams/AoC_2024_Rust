@@ -217,7 +217,7 @@ fn part_one(map:  &mut  Vec<Vec<char>>) -> i32 {
 
 
 
-fn main() {
+pub fn run()-> io::Result<()> {
     let input = "./src/input.txt";  
 
 
@@ -232,5 +232,5 @@ fn main() {
          Err(e) => println!("Error: {}", e),
           
         }
-        
+        Ok(())    
     }

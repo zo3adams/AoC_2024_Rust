@@ -65,7 +65,7 @@ fn get_press_count(initital_pos: (i32,i32), target_pos: (i32,i32), depth_level: 
 }
 
 
-fn part_one(codes:  Vec<String>) -> i32 {
+fn _part_one(codes:  Vec<String>) -> i32 {
     println!("{:?}", codes);
     let mut total_complexity = 0;
     let mut primary_key_pad_positions: HashMap<char, (i32,i32)> = HashMap::new();
@@ -89,9 +89,9 @@ fn part_one(codes:  Vec<String>) -> i32 {
     directional_keypad.insert('>', (1,2));
 
     //println!("movement from {} to {} is {}   --- ({:?} to {:?}", i_char, j_char,  decode_position_change(primary_key_pad_positions[&i_char], primary_key_pad_positions[&j_char]), primary_key_pad_positions[&i_char], primary_key_pad_positions[&j_char]);
-    let mut last_button_primary_key_pad = 'A';
-    let mut last_button_first_directional_key_pad = 'A';
-    let mut last_button_second_directional_key_pad = 'A';
+    let mut last_button_primary_key_pad;
+    let mut last_button_first_directional_key_pad;
+    let mut last_button_second_directional_key_pad;
 
     for code in codes {
         //unpack to movements on primary keypad
@@ -173,12 +173,10 @@ fn part_two(codes:  Vec<String>) -> u64 {
     directional_keypad_positions.insert('>', (1,2));
 
     //println!("movement from {} to {} is {}   --- ({:?} to {:?}", i_char, j_char,  decode_position_change(primary_key_pad_positions[&i_char], primary_key_pad_positions[&j_char]), primary_key_pad_positions[&i_char], primary_key_pad_positions[&j_char]);
-    let mut last_button = 'A';
+    let mut last_button;
 
     for code in codes {
         //unpack to movements on primary keypad
-        let mut path: String = String::from("");
-
         let mut total_length:u64  = 0;
         last_button = 'A';
 
@@ -202,7 +200,7 @@ fn part_two(codes:  Vec<String>) -> u64 {
 
 
 
-fn main() {
+pub fn run()-> io::Result<()> {
     let input = "./src/input.txt";  
 
 
@@ -220,5 +218,6 @@ fn main() {
          Err(e) => println!("Error: {}", e),
           
         }
-        
+        Ok(())
+
     }

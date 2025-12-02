@@ -1,9 +1,9 @@
-use std::collections::{HashMap, HashSet};
+use std::collections::{HashMap};
 use std::fs::File;
 use std::i32;
-use std::io::{self, BufRead, Write};
+use std::io::{self, BufRead};
 use std::path::Path;
-use colored::Colorize;
+
 
 
 
@@ -19,7 +19,7 @@ where
 }
 
 //returns the towel combo that makes the design, or blank if not possible
-fn dfs_into_design(design: String, towels: & Vec<String>) -> Vec<Vec<String>> {
+fn _dfs_into_design(design: String, towels: & Vec<String>) -> Vec<Vec<String>> {
 
     let mut final_combos: Vec<Vec<String>> = Vec::new();
     let mut candidates: Vec<Vec<String>> = vec![vec!["".to_string()]];
@@ -66,12 +66,12 @@ fn cached_recursive_dfs(target_design: String, towels: & Vec<String>, prefix_des
     }
 }
 
-fn part_one(towels: Vec<String>, designs: Vec<String>) -> i32 {
+fn _part_one(towels: Vec<String>, designs: Vec<String>) -> i32 {
     let mut possible_designs: i32 = 0;
 
     for design in designs {
         print!("Checking design {}", design);
-        let combo = dfs_into_design(design, &towels);
+        let combo = _dfs_into_design(design, &towels);
         if !combo.is_empty() {
             println!("  => can be made {} different ways", combo.len());
             possible_designs += 1;
@@ -102,7 +102,7 @@ fn part_two(towels: Vec<String>, designs: Vec<String>) -> u64 {
 
 
 
-fn main() {
+pub fn run()-> io::Result<()> {
     let input = "./src/input.txt";  
 
     match read_lines(input) {
@@ -125,5 +125,6 @@ fn main() {
          Err(e) => println!("Error: {}", e),
           
         }
-        
+    Ok(())
+
     }

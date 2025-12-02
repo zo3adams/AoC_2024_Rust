@@ -1,11 +1,10 @@
 
-use std::fs::{File, OpenOptions, remove_file};
+use std::fs::{File};
 use std::io::{self, Write};
-use std::ptr::addr_eq;
-use std::{any, i64};
+use std::{i64};
 use std::io::{BufRead};
 use std::path::Path;
-use std::collections::{HashMap, HashSet, VecDeque};
+use std::collections::{HashMap, VecDeque};
 use indexmap::IndexMap;
 
 #[derive(Debug, Clone)]
@@ -145,7 +144,7 @@ fn part_two(wires: &mut HashMap<String, bool>, ops_by_output: HashMap<String, Op
     //working_adder_comp.insert(format!("{} {} {} -> {}",format!("*can{:02}",x_inputs.len()-1), "OR", format!("*and{:02}",x_inputs.len()-1), final_z_string), 
     //Operation{input1: format!("*can{:02}",x_inputs.len()-1), input2: format!("*and{:02}",x_inputs.len()-1), operator: "OR".to_string(), output:  final_z_string.clone()});
 
-    for (description, gate) in working_adder_comp.iter() {
+    for (description, _gate) in working_adder_comp.iter() {
         println!("{}", description);
     }
 
@@ -163,7 +162,7 @@ fn part_two(wires: &mut HashMap<String, bool>, ops_by_output: HashMap<String, Op
       
         let mut output_file = File::create("src/wire_diagram_output.txt").expect("FAILED TO OPEN FILE");                
 
-        for i in 0..last_untagged_size {
+        for _i in 0..last_untagged_size {
             let candidate = untagged_wires.pop_back().unwrap();
             let actual_op = &ops_by_output[&candidate];
             println!("Working candidate {}", candidate);
@@ -209,7 +208,7 @@ fn part_two(wires: &mut HashMap<String, bool>, ops_by_output: HashMap<String, Op
                 add_on_string +=  &format!("({} {} {})", ops_by_output[actual_wire_name].input1, ops_by_output[actual_wire_name].operator, ops_by_output[actual_wire_name].input2).to_string();
             }
             let updated_working_gate = format!("{} {} {} -> {}", gate.input1, gate.operator, gate.input2, gate.output);
-            let result = writeln!(output_file, "{:54} | {:18}  | {}", description, add_on_string,updated_working_gate);
+            let _result = writeln!(output_file, "{:54} | {:18}  | {}", description, add_on_string,updated_working_gate);
         }
     }
 
@@ -220,7 +219,7 @@ fn part_two(wires: &mut HashMap<String, bool>, ops_by_output: HashMap<String, Op
 }
 
 
-fn main() {
+pub fn run()-> io::Result<()> {
     let input = "./src/input.txt";  
 
 
@@ -261,11 +260,11 @@ fn main() {
             }
            
         
-            //println!("Answer to part one:  {}", part_one( &mut wires, ops_by_output));
+            println!("Answer to part one:  {}", part_one( &mut wires, ops_by_output.clone()));
             println!("Answer to part two:  {}", part_two( &mut wires, ops_by_output));
          },
          Err(e) => println!("Error: {}", e),
           
         }
-        
+        Ok(())
     }

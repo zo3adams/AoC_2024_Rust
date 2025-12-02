@@ -40,7 +40,7 @@ impl PartialOrd for State {
 
 
 
-fn print_map(map: &Vec<Vec<char>>, predecessors: HashSet<String>) {
+fn _print_map(map: &Vec<Vec<char>>, predecessors: HashSet<String>) {
 
     for i in 0..map.len() {
         for j in 0..map[0].len() {
@@ -109,7 +109,7 @@ fn dijkstra(graph: &HashMap<String, Vec<(String, i32)>>, start: &String) -> Hash
 }
 
 
-fn get_path_and_cheats(start_node: String, end_node: String, distances: & HashMap<String, (i32, Vec<String>)>) -> (HashSet<String>, Vec<(String,String)>)  {
+fn _get_path_and_cheats(start_node: String, end_node: String, distances: & HashMap<String, (i32, Vec<String>)>) -> (HashSet<String>, Vec<(String,String)>)  {
     let mut predecessors: HashSet<String> = HashSet::new();
     predecessors.insert(start_node.clone());
     predecessors.insert(end_node.clone());
@@ -142,7 +142,7 @@ fn get_path_and_cheats(start_node: String, end_node: String, distances: & HashMa
 }
 
 //Djikstra's algorithm with a novel cost function that tracks position + cheat count
-fn part_one(map:  &mut  Vec<Vec<char>>) -> u32 {
+fn _part_one(map:  &mut  Vec<Vec<char>>) -> u32 {
     let directions: HashMap<char,(i32, i32)> = HashMap::from([
         ('<', (0, -1)),
         ('>', (0, 1)),
@@ -205,12 +205,12 @@ fn part_one(map:  &mut  Vec<Vec<char>>) -> u32 {
     let mut savings = distance_to_end_without_cheat - distance_to_end_with_cheat;
     println!("Without cheating path steps is: {}", distance_to_end_without_cheat);
     let mut worthy_cheat_count: u32 = 0;
-    let mut results = get_path_and_cheats(start_node.clone(), end_node_with_cheat.clone(), &distances);
+    let mut results = _get_path_and_cheats(start_node.clone(), end_node_with_cheat.clone(), &distances);
 
     println!("There are {} cheats that save {} picoseconds", results.1.len(), savings);
     worthy_cheat_count += results.1.len() as u32;
 
-    while (savings >= 100) {
+    while savings >= 100 {
 
         for cheats in results.1.iter() {
             //println!("cheats: {},{}", cheats.0, cheats.1);
@@ -222,14 +222,14 @@ fn part_one(map:  &mut  Vec<Vec<char>>) -> u32 {
         let distances: HashMap<String, (i32, Vec<String>)> = dijkstra(&graph, &start_node);
         let distance_to_end_with_cheat = distances[&end_node_with_cheat].0;
         savings = distance_to_end_without_cheat - distance_to_end_with_cheat;
-        results = get_path_and_cheats(start_node.clone(), end_node_with_cheat.clone(), &distances);
+        results = _get_path_and_cheats(start_node.clone(), end_node_with_cheat.clone(), &distances);
         println!("There are {} cheats that save {} picoseconds", results.1.len(), savings);
 
         if savings >= 100 {
             worthy_cheat_count += results.1.len() as u32;
         }
     }
-    print_map(map, results.0);
+    _print_map(map, results.0);
     worthy_cheat_count
 }
 
@@ -347,7 +347,7 @@ fn part_two(map:  &mut  Vec<Vec<char>>) -> u32 {
 
 
 
-fn main() {
+pub fn run()-> io::Result<()> {
     let input = "./src/input.txt";  
 
 
@@ -362,5 +362,6 @@ fn main() {
          Err(e) => println!("Error: {}", e),
           
         }
-        
+        Ok(())
+
     }

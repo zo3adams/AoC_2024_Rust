@@ -2,8 +2,6 @@
 use std::fs::File;
 use std::io::{self, BufRead};
 use std::path::Path;
-use std::collections::HashSet;
-use std::ptr::eq;
 
 
 fn read_lines<P>(filename: P) -> Result<Vec<String>,std::io::Error>
@@ -18,7 +16,7 @@ where
 
 
 
-fn part_one(operands: Vec<Vec<u64>>) -> u64 {
+fn _part_one(operands: Vec<Vec<u64>>) -> u64 {
     let mut sum_of_possible_equations = 0;
     for equation in operands {
         //println!("working equation {:?}", equation);
@@ -83,7 +81,7 @@ fn part_two(operands:Vec<Vec<u64>>) -> u64 {
 }
 
 
-fn main() {
+pub fn run()-> io::Result<()> {
     let input = "./src/sample_input.txt";     
     let mut operands:Vec<Vec<u64>> = Vec::new();
     match read_lines(input) {
@@ -109,6 +107,5 @@ fn main() {
         },
         Err(e) => println!("Error: {}", e),
     }
-
-    
+    Ok(())
 }

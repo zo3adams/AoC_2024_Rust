@@ -1,4 +1,3 @@
-use std::f32::consts::E;
 use std::fs::File;
 use std::io::{self, BufRead};
 use std::path::Path;
@@ -13,7 +12,7 @@ where
     Ok(lines)
 }
 
-fn part_one(mut right_column:Vec<i32>, mut left_column:Vec<i32>) -> i32 {
+fn _part_one(mut right_column:Vec<i32>, mut left_column:Vec<i32>) -> i32 {
     right_column.sort();
     left_column.sort();
 
@@ -31,9 +30,8 @@ fn part_one(mut right_column:Vec<i32>, mut left_column:Vec<i32>) -> i32 {
 
 }
 
-fn part_two(mut right_column:Vec<i32>, mut left_column:Vec<i32>) -> i32 {
+fn part_two(right_column:Vec<i32>, left_column:Vec<i32>) -> i32 {
 
-    let mut index:usize = 0;
     let mut sim_score:i32 = 0;
 
 
@@ -48,7 +46,7 @@ fn part_two(mut right_column:Vec<i32>, mut left_column:Vec<i32>) -> i32 {
     sim_score
 }
 
-fn main() {
+pub fn run()-> io::Result<()> {
 
     let input = "./src/input.txt";
 
@@ -74,4 +72,6 @@ fn main() {
     //part_one(right_column, left_column);
     part_two(right_column, left_column);
 
+     Ok(())
 }
+

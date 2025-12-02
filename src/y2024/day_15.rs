@@ -22,8 +22,6 @@ where
 
 fn print_map(map: &Vec<Vec<char>>) {
 
-    let mut prior_char = '.';
-
     for i in 0..map.len() {
         for j in 0..map[0].len() {
 
@@ -32,7 +30,7 @@ fn print_map(map: &Vec<Vec<char>>) {
             }else {
                 print!("{}", map[i][j]);
             }
-            prior_char = map[i][j];
+
             
         }
         println!("");
@@ -42,7 +40,7 @@ fn print_map(map: &Vec<Vec<char>>) {
 
 
 
-fn part_one(map:  &mut  Vec<Vec<char>>, moves: Vec<char>) -> i32 {
+fn _part_one(map:  &mut  Vec<Vec<char>>, moves: Vec<char>) -> i32 {
     let directions: HashMap<char,(i32, i32)> = HashMap::from([
         ('<', (0, -1)),
         ('>', (0, 1)),
@@ -154,8 +152,6 @@ fn part_two(map:  &mut  Vec<Vec<char>>, moves: Vec<char>) -> i32 {
         new_map.push(new_row);
     } 
 
-    let max_x = new_map[0].len() as i32;
-    let max_y = new_map.len() as i32;
 
     let mut robot_position: (i32,i32) = (0,0);
     //get robot position
@@ -325,7 +321,7 @@ fn part_two(map:  &mut  Vec<Vec<char>>, moves: Vec<char>) -> i32 {
 }
 
 
-fn main() {
+pub fn run()-> io::Result<()> {
     let input = "./src/input.txt";  
 
 
@@ -363,5 +359,5 @@ fn main() {
          Err(e) => println!("Error: {}", e),
           
         }
-        
+       Ok(())     
     }

@@ -19,7 +19,7 @@ where
 
 //terminal states ?
 // 1 -> 2024 -> 20, 24 -> 2 0 2 4 ->  4048 1 4048 8096 -> 40  48  2024  40  48  80 96 -> 
-fn part_one(data: Vec<u64>) -> u64 {
+fn _part_one(data: Vec<u64>) -> u64 {
     let mut total_digit_count = 0;
     for val in data {
         let mut vals_for_now: Vec<u64> = vec![val];
@@ -49,7 +49,6 @@ fn part_one(data: Vec<u64>) -> u64 {
 }
 
 fn part_two(data: Vec<u64>) -> u64 {
-    let mut total_digit_count = 0;
 
     let mut all_stone_values: HashMap<u64, u64> = HashMap::new();
     for key in data {
@@ -87,23 +86,23 @@ fn part_two(data: Vec<u64>) -> u64 {
             all_stone_values.entry(*key).and_modify(|v| *v -= orig_instance_count).or_insert(0);         
         }
 
-        total_digit_count = 0;
+
+        let mut total_digit_count = 0;
         for v in all_stone_values.values() {
             total_digit_count += v;
         }
         println!("After blink {} we see {} total stones with {} unique values", i, total_digit_count, all_stone_values.keys().len());
-   
     }
     
-    total_digit_count = 0;
+
+    let mut total_digit_count = 0;
     for v in all_stone_values.values() {
         total_digit_count += v;
     }
     total_digit_count
 }
 
-
-fn main() {
+pub fn run()-> io::Result<()> {
     let input = "./src/input.txt";     
 
     match read_lines(input) {
@@ -120,4 +119,5 @@ fn main() {
         },
         Err(e) => println!("Error: {}", e),
     }
+    Ok(())
 }

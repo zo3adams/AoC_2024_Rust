@@ -14,7 +14,7 @@ where
 }
 
 
-fn is_safe(row:&[i32]) -> bool {
+fn _is_safe(row:&[i32]) -> bool {
     row.windows(2).all(|window| {
         let diff = window[1] - window[0];
         diff.abs() <= 3 && 
@@ -35,7 +35,7 @@ fn extract_digits(input: &str) -> u32 {
     concatenated.parse::<u32>().expect("Parse error?")
 }
 
-fn part_one(data: Vec<String>) -> u32 {
+fn _part_one(data: Vec<String>) -> u32 {
 
     let mut total: u32 = 0;
     
@@ -89,7 +89,7 @@ fn part_two(data: Vec<String>) -> u32 {
  
 }
 
-fn main() {
+pub fn run()-> io::Result<()> {
 
     //ran zsh command below to filter for part one
     // cat sample_input.txt | grep -ohE 'mul\([0-9]{1,3},[0-9]{1,3}\)' > updated_sample_input.txt
@@ -107,5 +107,6 @@ fn main() {
         Err(e) => println!("Error: {}", e),
     }
   
+  Ok(())
 
 }
